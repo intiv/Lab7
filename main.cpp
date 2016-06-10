@@ -15,6 +15,7 @@ using std::vector;
 
 void listarEscuadrones(const vector<escuadron*>&);
 
+void listarEscuadrones(const vector<escuadron*>&,vector<int>);
 int main(int argc,char* argv[]){
 	bool continuar=true;
 	vector<escuadron*> escuadrones;
@@ -78,7 +79,7 @@ int main(int argc,char* argv[]){
 				vector<escuadron*> jugador1, jugador2;
 				int ind;
 				vector<int> indices;
-				for(int i=0;i<4;i++){
+				for(int i=0;i<1;i++){
 					listarEscuadrones(escuadrones,indices);
 					cout<<"Seleccione indice: "<<endl;
 					cin>>ind;
@@ -86,7 +87,7 @@ int main(int argc,char* argv[]){
 					indices.push_back(ind);
 					//escuadrones.erase(ind);
 				}
-				for(int i=0;i<4;i++){
+				for(int i=0;i<1;i++){
 					listarEscuadrones(escuadrones,indices);
 					cout<<"Seleccione indice: "<<endl;
 					cin>>ind;
@@ -99,28 +100,30 @@ int main(int argc,char* argv[]){
 					if(jugador1.size()>0&&jugador2.size()>0){
 						if(turno==1){
 							listarEscuadrones(jugador1);
-							cout<<"Jugador1: Elija cual escuadron va a atacar"<<endl;
+							cout<<"Jugador1: Elija cual escuadron va a atacar:"<<endl;
 							cin>>index1;
 							listarEscuadrones(jugador2);
-							cout<<"Jugador 2: Elija cual escuadron va a defender"<<endl;
+							cout<<"Jugador 2: Elija cual escuadron va a defender:"<<endl;
 							cin>>index2;
 							if(jugador1.at(index1)->ataque()>jugador2.at(index2)->defensa()){
 								cout<<"El escuadron del jugador 1 vencio al del jugador 2!"<<endl;
-								delete jugador2.at(index2);
+								delete jugador2[index2];
+								//jugador2.erase(index2);
 							}else{
 								cout<<"El jugador 2 se defendio del ataque del jugador 1!"<<endl;
 							}
 							turno=2;
 						}else if(turno==2){
 							listarEscuadrones(jugador2);
-							cout<<"Jugador2: Elija cual escuadron va a atacar"<<endl;
+							cout<<"Jugador2: Elija cual escuadron va a atacar:"<<endl;
 							cin>>index2;
 							listarEscuadrones(jugador1);
-							cout<<"Jugador 1: Elija cual escuadron va a defender"<<endl;
+							cout<<"Jugador 1: Elija cual escuadron va a defender: "<<endl;
 							cin>>index1;
 							if(jugador2.at(index2)->ataque()>jugador1.at(index1)->defensa()){
 								cout<<"El escuadron del jugador 2 vencio al del jugador 1!"<<endl;
-								delete jugador1.at(index2);
+								delete jugador1[index1];
+							//	jugador1.erase(index1);
 							}
 							turno=1;
 						}
@@ -130,6 +133,8 @@ int main(int argc,char* argv[]){
 						}else{
 							cout<<"FELICIDADES JUGADOR 1, HAS MASACRADO A MUCHAS PERSONAS Y ERES VICTORIOSO!";
 						}
+						jugador1.clear();
+						jugador2.clear();
 						jugar=false;
 					}
 				}
