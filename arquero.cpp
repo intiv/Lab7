@@ -1,8 +1,10 @@
 #include "soldado.h"
 #include "arquero.h"
 #include<string>
+#include<sstream>
 
 using std::string;
+using std::stringstream;
 
 arquero::arquero(string name,string city,int age,double flechas,double precision):soldado(name,city,age),flechas(flechas),precision(precision){
 }

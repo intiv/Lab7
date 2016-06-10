@@ -11,5 +11,5 @@ class soldado{
 	soldado(string,string,int=18);
 	virtual double ataque()const=0;
 	virtual double defensa()const=0;
-	string toString()const=0;
+	virtual string toString()const=0;
 };

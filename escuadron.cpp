@@ -6,6 +6,7 @@
 #include<vector>
 #include<string>
 #include<sstream>
+#include<iostream>
 
 using std::string;
 using std::vector;
@@ -15,6 +16,7 @@ escuadron::escuadron(string name, vector<soldado*> soldiers):name(name),soldiers
 }
 
 escuadron::~escuadron(){
+	std::cout<<"Eliminando escuadron "<<name<<"..."<<std::endl;	
 	for(int i=0;i<soldiers.size();i++){
 		delete soldiers.at(i);
 	}
@@ -48,7 +50,7 @@ void escuadron::addSoldier(int tipo,string name,string city, int age, double atr
 
 string escuadron::toString()const{
 	stringstream ss;
-	ss<<"Escuadron "<<name<<": ";
+	ss<<"Escuadron "<<name<<":\n";
 	for(int i=0;i<soldiers.size();i++){
 		ss<<"\t"<<soldiers.at(i)->toString()<<"\n";
 	}
